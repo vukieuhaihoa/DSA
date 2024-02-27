@@ -9,7 +9,6 @@ class Solution:
                 res = gain[i]         
         return res
 
-
 def read_test_case():
     text = input()
     res = list(map(int, text.strip('][').split(',')))

@@ -22,7 +22,8 @@
     "body": [
       "def read_test_case():",
       "    text = input()",
-      "    res = list(map(int, text.strip('][').split(',')))",
+      "    # res = list(map(int, text.strip('][').split(',')))",
+      "    res = json.loads(text)",
       "    return res"
     ]
   },
