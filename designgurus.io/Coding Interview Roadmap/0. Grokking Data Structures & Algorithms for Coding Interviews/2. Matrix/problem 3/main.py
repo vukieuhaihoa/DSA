@@ -13,7 +13,6 @@ class Solution:
         
         return [index, maximum] 
             
-    
 def read_test_case():
     text = input()
     res = json.loads(text)
