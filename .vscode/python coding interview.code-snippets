@@ -42,5 +42,14 @@
     "scope": "python",
     "prefix": "py-if-main",
     "body": ["if __name__ == '__main__':", "    main()"]
+  },
+  "Solution": {
+    "scope": "python",
+    "prefix": "py-sol",
+    "body": [
+      "class Solution:",
+      "    def ${1:func_name}(self, ${2:args}):",
+      "        ${3:pass}"
+    ]
   }
 }

@@ -5,40 +5,51 @@ class Solution:
         tempStack = []
         
         # ToDo: Write Your Code Here.
-        n = len(stack)
-        for _ in range(len(stack)):
-            # find the smallest element from stack using tempStack
-            smallest = float('inf')
-            count = 0
-            if n == 0: 
-                return stack
-            for _ in range(n):
-                ele = stack.pop()
-                tempStack.append(ele)
-                if ele < smallest:
-                    smallest = ele
-                    count = 1
-                    continue
-                if ele == smallest:
-                    count += 1
+        # This is a way that I figure out by myself, I am so proud of my-self
+        # n = len(stack)
+        # for _ in range(len(stack)):
+        #     # find the smallest element from stack using tempStack
+        #     smallest = float('inf')
+        #     count = 0
+        #     if n == 0: 
+        #         return stack
+        #     for _ in range(n):
+        #         ele = stack.pop()
+        #         tempStack.append(ele)
+        #         if ele < smallest:
+        #             smallest = ele
+        #             count = 1
+        #             continue
+        #         if ele == smallest:
+        #             count += 1
+
+        #     # current: stack = [], tempStack = [-1, -5, 10, 20], smallest = -5
+        #     # push the number of smallest elements to stack
+        #     # maybe -5 can appear 2 3 4 times
+        #     for _ in range(count):
+        #         stack.append(smallest)
                 
-            
-            # current: stack = [], tempStack = [-1, -5, 10, 20], smallest = -5
-            # push the number of smallest elements to stack
-            # maybe -5 can appear 2 3 4 times
-            for _ in range(count):
-                stack.append(smallest)
-                
-            # stack = [-5], tempStack = [-1, -5, 10, 20], smallest = -5
-            # stack = [-5], push all tempStack to stack without "smallest" ele
-            for _ in range(len(tempStack)):
-                ele = tempStack.pop()
-                if ele != smallest:
-                    stack.append(ele)
-            # stack = [-5, 20, 10, -1], tempStack = [], smallest = -5     
-            n -= count # n = 3
+        #     # stack = [-5], tempStack = [-1, -5, 10, 20], smallest = -5
+        #     # stack = [-5], push all tempStack to stack without "smallest" ele
+        #     for _ in range(len(tempStack)):
+        #         ele = tempStack.pop()
+        #         if ele != smallest:
+        #             stack.append(ele)
+        #     # stack = [-5, 20, 10, -1], tempStack = [], smallest = -5     
+        #     n -= count # n = 3
+        # return stack
         
-        return stack
+        # This is the way that I know after read the solution
+        while stack:
+            temp = stack.pop()
+            
+            while tempStack and temp < tempStack[-1]:
+                stack.append(tempStack.pop())
+            
+            tempStack.append(temp)
+        
+        return tempStack
+                
     
 def read_test_case():
     text = input()
