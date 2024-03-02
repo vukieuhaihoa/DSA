@@ -29,8 +29,10 @@ class Solution:
 def main():
     v1 = [1, 2]
     v2 = [3, 4, 5, 6]
+    for i in (v1, v2):
+        print(i)
     res = [(len(v), iter(v)) for v in (v1, v2) if v]
-    print(res)
+    # print(res)
 
 if __name__ == '__main__':
     main()
