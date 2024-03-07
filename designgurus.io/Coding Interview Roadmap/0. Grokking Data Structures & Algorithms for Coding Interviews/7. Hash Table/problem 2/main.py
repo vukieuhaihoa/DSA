@@ -5,10 +5,9 @@ class Solution:
         maxUnique = -1
         # ToDo: Write Your Code Here.
         d = defaultdict(int)
-        for num in A:
-            d[num] += 1
-        
-        for k, v in d.items():
-            if v == 1 and k > maxUnique:
-                maxUnique = k
+        for n in A:
+            d[n] += 1
+        for n in A:
+            if d[n] == 1 and n > maxUnique:
+                maxUnique = n
         return maxUnique
