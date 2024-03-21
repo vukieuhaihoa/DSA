@@ -1,14 +1,15 @@
+from typing import Optional
 class Node:
-    def __init__(self, value: int, next: 'Node' = None) -> None:
-        self.value: int = value
-        self.next: Node = next
+    def __init__(self, value: int, next: Optional['Node'] = None) -> None:
+        self.value = value
+        self.next = next
         
 class LinkedList:
     def __init__(self, value: int) -> None:
         new_node = Node(value)
         self.head = new_node
         self.tail = new_node
-        self.length = 1
+        self.length: int = 1
     
     def print_list(self) -> None:
         cur = self.head
@@ -21,7 +22,7 @@ class LinkedList:
         self.head = self.tail = None
         self.length = 0
      
-    def append(self, value) -> bool:
+    def append(self, value: int) -> bool:
         new_node = Node(value)
         if self.head is None:
             self.head = self.tail = new_node
@@ -31,7 +32,7 @@ class LinkedList:
         self.length += 1
         return True
     
-    def pop(self) -> Node:
+    def pop(self) -> Optional[Node]:
         if self.head is None: return None
         tail = self.tail
         if self.length == 1:
@@ -45,7 +46,7 @@ class LinkedList:
         self.length -= 1
         return tail
 
-    def prepend(self, value) -> bool:
+    def prepend(self, value: int) -> bool:
         new_node = Node(value)
         if self.head is None:
             self.head = self.tail = new_node
@@ -55,7 +56,7 @@ class LinkedList:
         self.length += 1
         return True
     
-    def pop_first(self) -> Node:
+    def pop_first(self) -> Optional[Node]:
         if self.head is None: return None
         temp = self.head
         self.head = self.head.next
@@ -65,16 +66,15 @@ class LinkedList:
         temp.next = None
         return temp
     
-    def get(self, index: int) -> Node:
+    def get(self, index: int) -> Optional[Node]:
         if index < 0 or index >= self.length: return None
         cur = self.head
         for _ in range(index): cur = cur.next
         return cur
     
     def set_value(self, index: int, value: int) -> bool:
-        if index < 0 or index >= self.length: return None
-        cur = self.head
-        for _ in range(index): cur = cur.next
+        cur = self.get(index)
+        if not cur: return False 
         cur.value = value
         return True    
     
@@ -94,7 +94,30 @@ class LinkedList:
         cur.next = new_node
         self.length += 1
         return True
-        
+
+    def remove(self, index: int) -> Optional[Node]:
+        if index < 0 or index >= self.length: return None
+        if index == 0: return self.pop_first()
+        if index == self.length - 1: return self.pop()
+        prev = self.get(index - 1)
+        temp = prev.next
+        prev.next = prev.next.next
+        temp.next = None
+        self.length -= 1
+        return temp
+    
+    def reverse(self) -> None:
+        if self.length <= 1: return
+        self.tail = self.head
+        prev = None
+        cur = self.head
+        next = None
+        while cur:
+            next = cur.next
+            cur.next = prev
+            prev = cur
+            cur = next
+        self.head = prev
 def main():
     ll = LinkedList(1)
     ll.append(2)
